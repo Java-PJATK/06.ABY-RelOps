@@ -5,7 +5,7 @@ Listing 6 ABY-RelOps/RelOps.java Page 23
 
 ## 5.1 Operators
 
-Operators are usually expressed by symbols (like +, *, etc.) and represent operations to be performed on their operands (arguments). Most operators are binary, i.e., they operate on two operands; some operators act on one operand only (they are called unary operators). Finally, there is one ternary operator.
+Operators are usually expressed by symbols (like `+`, `*`, etc.) and represent operations to be performed on their **operands** (arguments). Most operators are _binary_, i.e., they operate on two operands; some operators act on one operand only (they are called _unary_ operators). Finally, there is one _ternary_ operator.
 
 ### 5.1.1 Assignment operator
 
@@ -13,46 +13,44 @@ Assignment operator
 
 `b = expr;`
 
-evaluates the value of the right-hand side and stores the result in a variable appearing
-on the left-hand side. The type of the value of expr must be the same as the type of b,
-or be implicitly convertible to this type. It is important to remember that the whole
-expression a=b has a type and a value: the type of this expression is the type of the
-left-hand operand, and its value is equal to the value of the left-hand operand after
-the assignment. Therefore, after
+evaluates the value of the right-hand side and stores the result in a variable appearing on the left-hand side. The type of the value of `expr` must be the same as the type of `b`, or be implicitly convertible to this type. It is important to remember that the whole expression `a=b` has a type and a value: the type of this expression is the type of the left-hand operand, and its value is equal to the value of the left-hand operand _after_ the assignment. Therefore, after
+
+```java
 int a, b = 1, c;
 c = (a = b+1) + 1;
-values of a, b and c will be 2, 1, 3.
-Note that addition (subtraction, etc.) does not modify values of operands — it just
-yields a new temporary value and we have to do something with this value: print it,
-assign it to a variable, use it in an expression, etc. For example, after
+```
+
+values of `a`, `b` and `c` will be 2, 1, 3.
+
+Note that addition (subtraction, etc.) does _not_ modify values of operands — it just yields a new _temporary value_ and we have to do something with this value: print it, assign it to a variable, use it in an expression, etc. For example, after
+
+```java
 int a = 5, b = 1;
 b = 2*(a + 1) + b;
-the value of a is still 5; when calculating a+1 we got a value (in this case 6) which
-is subsequently multiplied by 2 and added the current value of b, i.e., 1. We haven’t
-assigned any new value to a, so it remains as it was. However, the value of the whole
-expression on the right-hand side of the assignment (13) has been assigned to b (erasing
-its previous value), so b is modified here.
-There is a special form of assignment, the so called compound or augmented as-
-signment operator. It has the form
+```
 
-a @= b
+the value of a is still 5; when calculating `a+1` we got a value (in this case 6) which is subsequently multiplied by 2 and added the current value of b, i.e., 1. We haven’t assigned any new value to `a`, so it remains as it was. However, the value of the whole expression on the right-hand side of the assignment (13) has been assigned to b (erasing its previous value), so `b` _is_ modified here.
 
-where @ stands for any binary operator, like +, *, %, >>, etc.
+There is a special form of assignment, the so called **compound** or **augmented** assignment operator. It has the form
 
-and is (almost) equivalent to
+`a @= b`
 
-a = a @ b
+where `@` stands for any binary operator, like `+`, `*`, `%`, `>>`, etc. and is (almost) equivalent to
 
-For example a += 5 would mean increment a by 5, and a /= 2 — divide a by 2. Other examples:
+`a = a @ b`
+
+For example `a += 5` would mean _increment_ `a` _by 5_, and `a /= 2` — _divide_ a _by 2_. Other examples:
 
 ```
-// shift operator
+    // shift operator
 a <<= 2;
 a = a << 2;
-// mod (remainder) operator
+
+    // mod (remainder) operator
 a %= 7;
 a = a % 7;
-// bitwise ANDing
+
+    // bitwise ANDing
 a &= 0xFF;
 a = a & 0xFF;
 ```
@@ -60,41 +58,42 @@ Incrementing and decrementing integral values by 1 is so often used that it has 
 
 If a is a variable of an integral type, then ++a and a++ cause a to be incremented by 1 (with - instead of + — decremented). However, there is a difference between these two forms.
 
-Preincrementation or decrementation (++a or --a) are ‘immediate’. The value of a is
-incremented (decremented) and the value of the expression ++a or --a will be equal to
-this already incremented or decremented value.
+_Pre_incrementation or decrementation (`++a` or `--a`) are ‘immediate’. The value of a is incremented (decremented) and the value of the expression `++a` or `--a` will be equal to this already incremented or decremented value.
 
-However, when a variable (say, a) is postincremented (or postdecremented), the value
-of the variable a is also modified, but the value of the expression a++ (or a--) is equal
-to the ’old’, unmodified value of a.
+However, when a variable (say, a) is _post_incremented (or _post_decremented), the value of the variable a is also modified, but the value of the _expression_ `a++` (or `a--`) is equal to the ’old’, unmodified value of `a`.
 
 For example, after
 
+```
 int a = 5, b = 1, c;
 c = ++a + b--;
-c will be 7, as on the right-hand side a has been incremented and the value of ++a is
-equal to this incremented value (which is 6 in the example), while b is decremented,
-but the value of the expression b-- is equal to the ’old’, not decremented, value of b
-(i.e., still 1). However, after
+```
+
+c will be 7, as on the right-hand side a has been incremented and the value of `++a` is equal to this incremented value (which is 6 in the example), while b is decremented, but the value of the expression `b--` is equal to the ’old’, not decremented, value of `b` (i.e., still 1). However, after
+
+```
 int a = 5, b = 1, c;
 c = ++a + --b;
-c will be 6, as values of ++a and --b will reflect ’new’ values of these variables. In both
-cases, after the assignment to c, values of a and b are 6 and 0, respectively.
+```
 
-### 5.1.2 Arithmetic operators
+c will be 6, as values of `++a` and `--b` will reflect ’new’ values of these variables. In both cases, after the assignment to `c`, values of `a` and `b` are 6 and 0, respectively.
 
-Well known examples of arithmetic operators include addition (a+b), multiplication
-(a*b), division (a/b), and subtraction (a-b). As we can see, binary operators (those,
+### 5.1.2 Arithmetic operators  
+
+Well known examples of arithmetic operators include addition (a+b), multiplication (a*b), division (a/b), and subtraction (a-b). As we can see, binary operators (those,
 that require two operands) are placed between operands they act upon.
+
 Important: All binary arithmetic operations are always performed on
 • two values of type int, or
 • two values of type long, or
 • two values of type float, or
 • two values of type double,
+
 and the result is the value of the same type as the type of operands.
-In other cases, the values of one or both operands will be implicitly converted to match
-one of these cases. Therefore:
-20
+
+In other cases, the values of one or both operands will be implicitly converted to match one of these cases. Therefore:
+
+```
 int i1 = 7;
 char c1 = 'A', c2 = 'x';
 short s1 = 3;
@@ -118,6 +117,8 @@ int
 r5 = c1 + s1;
 // char
 -> int, short -> int
+```
+
 For example, two values of type byte added together give int, not byte. Therefore,
 byte a = 1, b = 2;
 byte c = a + b;
