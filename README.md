@@ -163,84 +163,37 @@ System.out.println("-7 %  2 = " + (-7 % 2 ));
 System.out.println("-7 % -2 = " + (-7 %-2 ));
 ```
 
-prints
-7 /
-2 = 3
-7 / -2 = -3
--7 /
-2 = -3
--7 / -2 = 3
-7 %
-2 = 1
-7 % -2 = 1
--7 %
-2 = -1
--7 % -2 = -1
-An important practical conclusion is to never use
-if (a % 2 == 1) ...
-to check, if a is odd (because if it’s odd but negative, the remainder will be −1). Use
-rather
-if (a % 2 != 0) ...
-Instead of remembering all these rules about negative operands, it is better just not to
-use negative numbers in remainder operations.
-Note also that modulus operator works also for floating point types; for example
-7.75 % 0.5 is 0.25.
-5.1.3
-Conditional and relational operators
-Relational operators yield Boolean values. Comparing values (of various types) we do
-get true or false, i.e., a Boolean value. For example
-a
-< b
-// is a smaller than b ?
-a
-> b
-// is a bigger
-than b ?
-a <= b
-// is a smaller or equal to b ?
-a >= b
-// is a bigger or equal to b ?
-a == b
-// are a and b equal ?
-a != b
-// are a and b different ?
-Logical values may be combined: the logical conjunction (AND)
-is denoted by &&
-and alternative (OR)
-by ||. An exclamation mark denotes negation (NOT);
-for
-example
-ba <= b && b <= c
-< a || b >
-c
-!(a <= b && b <= c)
-The first condition corresponds to checking if b belongs to the [a, c] interval, while the
-second if b is outside this interval. The third condition is just a negation of the first,
-so is equivalent to the second (de Morgan’s law).
-Very important: && and || operators are short-circuited (this feature is also
-known as McCarthy evaluation) — if, after evaluation of the first term, the result
-is already known, the second term will not be evaluated (and this is guaranteed).
-Therefore, if an expression to be evaluated is of the form
-expr1 && expr2
-22
-then if expr1 is false, then the result is already known (must be false) and expr2 will
-not be evaluated at all. Similarly, for
-expr1 || expr2
-if expr1 is true, then the result must be true and expr2 will not be evaluated. For
-example, if a and b are integers, an expression like
-if ( b != 0 && a/b > 5) ...
-will never lead to division by zero: if b is zero, the condition b != 0 is false, the whole
-condition must be therefore false and division by b will not be even tried. Note that
-changing the order
-if ( a/b > 5 && b != 0 ) ...
-could result in divide-by-zero error!
-In very rare situations, we do want both operands of an OR or AND operator to
-be evaluated, regardless of the result of the evaluation of the first operand. In these
-cases, we can use operators | and & (single, not doubled). Then both operands are
-always evaluated. Note, that these symbols stand for logical AND and OR only if their
-operands are themselves of type boolean. If operands are integer numbers, then the
-same symbols mean something different: they denote bit-wise AND and bit-wise OR
-operators which result in integer values (see the next section).
+Sure, here's your text formatted for GitHub Markdown:
+
+---
+
+### 5.1.3 Conditional and relational operators
+
+Relational operators yield Boolean values. Comparing values (of various types) we get true or false, i.e., a Boolean value. For example:
+
+- `a < b` // is a smaller than b ?
+- `a > b` // is a bigger than b ?
+- `a <= b` // is a smaller or equal to b ?
+- `a >= b` // is a bigger or equal to b ?
+- `a == b` // are a and b equal ?
+- `a != b` // are a and b different ?
+
+Logical values may be combined: the logical conjunction (AND) is denoted by `&&` and alternative (OR) by `||`. An exclamation mark denotes negation (NOT); for example:
+
+- `a <= b && b <= c` // b belongs to the [a, c] interval
+- `a < b || b > c` // b is outside this interval
+- `!(a <= b && b <= c)` // negation of the first condition, equivalent to the second (de Morgan’s law)
+
+**Short-circuiting:** `&&` and `||` operators are short-circuited (also known as McCarthy evaluation). If, after evaluation of the first term, the result is already known, the second term will not be evaluated. Therefore:
+
+- For `expr1 && expr2`: if `expr1` is false, then `expr2` will not be evaluated.
+- For `expr1 || expr2`: if `expr1` is true, then `expr2` will not be evaluated.
+
+For example, in the expression `if (b != 0 && a/b > 5)`, division by zero will never occur because if `b` is zero, `b != 0` is false, making the entire condition false, and division by `b` will not be attempted.
+
+**Caution:** Changing the order to `if (a/b > 5 && b != 0)` could result in a divide-by-zero error if `b` is zero!
+
+In very rare situations, if we want both operands of an OR or AND operator to be evaluated regardless of the result of the evaluation of the first operand, we can use operators `|` and `&` (single, not doubled). Then both operands are always evaluated. Note that these symbols (`|` and `&`) stand for logical AND and OR only if their operands are boolean types. If operands are integer numbers, they denote bit-wise AND and bit-wise OR operators which result in integer values (see the next section).
 
 There is also the so called ‘exclusive OR’ (XOR) operator, denoted by `ˆ`. If `expr1` and `expr2` have values of type `boolean`, then the expression
 
