@@ -93,51 +93,46 @@ and the result is the value of the same type as the type of operands.
 
 In other cases, the values of one or both operands will be implicitly converted to match one of these cases. Therefore:
 
-```
+To format the provided content in GitHub Markdown without rephrasing:
+
+```java
 int i1 = 7;
 char c1 = 'A', c2 = 'x';
 short s1 = 3;
 long l1 = 9;
 double d1 = 3.5;
-int
-r1 = i1 + s1;
-// short -> int
-long
-r2 = l1 + c1;
-// char
--> long
-double r3 = l1 + d1;
-// long
--> double
-int
-r4 = c1 + c2;
-// char
--> int (both operands)
-int
-r5 = c1 + s1;
-// char
--> int, short -> int
+
+int r1 = i1 + s1;      // short -> int
+long r2 = l1 + c1;     // char -> long
+double r3 = l1 + d1;   // long -> double
+int r4 = c1 + c2;      // char -> int (both operands)
+int r5 = c1 + s1;      // char -> int, short -> int
 ```
 
-For example, two values of type byte added together give int, not byte. Therefore,
+Explanation and Notes:
+- When adding values of different types:
+  - Adding a `short` and an `int` results in an `int`.
+  - Adding a `long` and a `char` results in a `long`.
+  - Adding a `long` and a `double` results in a `double`.
+  - Adding two `char` values results in an `int`.
+  - Adding a `char` and a `short` results in an `int` (due to promotion to `int`).
+
+For example, adding two `byte` values together gives an `int`, not a `byte`. Therefore, explicit casting would be required to store the result in a `byte` variable:
+
+```java
 byte a = 1, b = 2;
-byte c = a + b;
-// WRONG
-will not compile, because the result of a + b is of type int, so explicit casting would
-be required
-byte a = 1, b = 2;
-byte c = (byte)(a + b);
-// now OK
+byte c = (byte)(a + b); // Now OK
+```
+
 Also remember that if two operands are of integral type, so is the result. Therefore,
 1/2 is exactly 0, and 7/2 is exactly 3. When you divide two integers values, the result
-is alway truncated (its fractional part removed) towards zero — for example 7/3 and
-−7/3 are 2 and −2, respectively.
-Everybody knows addition, subtraction, multiplication and division. Less known
-is the remainder
-(also called modulus operator) operator: a%b, yields the remainder
-after the division of a by b, so, for example,
-20%7 is 6 (as 20 is 2*7+6)
-19%6 is 1 (as 19 is 3*6+1)
+is always truncated towards zero — for example, `7/3` and `-7/3` are `2` and `-2`, respectively.
+
+Everybody knows addition, subtraction, multiplication, and division. Less known is the remainder (also called modulus operator) operator: `a % b`, yields the remainder after the division of `a` by `b`, so for example,
+
+- `20 % 7` is `6` (as `20` is `2*7 + 6`)
+- `19 % 6` is `1` (as `19` is `3*6 + 1`)
+
 etc.
 
 Note that in mathematics remainders are never negative. In most programming languages, however, the following is assumed to be always true:
@@ -259,4 +254,4 @@ For example,
 a > b ? System.out.print("a") : System.out.print("b"); // NO!!!
 ```
 
-doesn’t make sense, because `print` has no value
+doesn’t make sense, because `print` has no value.
